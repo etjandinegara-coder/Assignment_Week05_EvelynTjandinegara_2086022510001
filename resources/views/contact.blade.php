@@ -1,241 +1,47 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Halaman Blog</title>
-    @vite('resources/css/app.css')
-</head>
-<body>
-<nav
-   class="flex py-2 px-4 md:px-8 bg-white border-b border-slate-300 dark:border-neutral-700 dark:bg-neutral-900 min-h-[68px] relative z-20"
-   aria-label="Main navigation">
-   <div class="max-w-7xl mx-auto flex flex-wrap items-center gap-4 w-full">
-      <div class="flex-1 flex">
-         <a href="#"
-            class="min-w-9 inline-block focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded">
-            <span class="sr-only">Your Company</span>
-            <img src="https://readymadeui.com/logo-alt.svg" alt="readymadeui logo" class="h-9 w-auto" />
-         </a>
-      </div>
+@extends('layout.layout')
 
-      <div id="collapseMenu" tabindex="-1"
-         class="hidden lg:block max-lg:bg-white dark:max-lg:bg-neutral-900 max-lg:border-l max-lg:border-slate-300 dark:max-lg:border-neutral-700 max-lg:w-1/2 max-lg:fixed max-lg:top-0 max-lg:right-0 max-lg:h-full max-lg:shadow-md max-lg:overflow-auto max-sm:w-full z-50 outline-none">
+@section('content')
+    <section class="contact">
 
-         <div
-            class="py-2 px-4 flex justify-between items-center border-b border-slate-300 sticky top-0 bg-white dark:border-neutral-700 dark:bg-neutral-900 lg:hidden max-lg:min-h-[68px]">
-            <a href="#"
-               class="inline-block focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded">
-               <span class="sr-only">Your Company</span>
-               <img src="https://readymadeui.com/logo-alt.svg" alt="readymadeui logo" class="h-9 w-auto" />
-            </a>
-            <button type="button" aria-controls="collapseMenu" id="toggleClose"
-               class="cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded">
-               <span class="sr-only">Close main menu</span>
-               <svg xmlns="http://www.w3.org/2000/svg" class="size-4 fill-slate-900 dark:fill-slate-50"
-                  aria-hidden="true" viewBox="0 0 329.269 329">
-                  <path
-                     d="M194.8 164.77 323.013 36.555c8.343-8.34 8.343-21.825 0-30.164-8.34-8.34-21.825-8.34-30.164 0L164.633 134.605 36.422 6.391c-8.344-8.34-21.824-8.34-30.164 0-8.344 8.34-8.344 21.824 0 30.164l128.21 128.215L6.259 292.984c-8.344 8.34-8.344 21.825 0 30.164a21.27 21.27 0 0 0 15.082 6.25c5.46 0 10.922-2.09 15.082-6.25l128.21-128.214 128.216 128.214a21.27 21.27 0 0 0 15.082 6.25c5.46 0 10.922-2.09 15.082-6.25 8.343-8.34 8.343-21.824 0-30.164zm0 0"
-                     data-original="#000000" />
-               </svg>
-            </button>
-         </div>
+        @if (session('sukses'))
+            <p class="alert sukses">{{ session('sukses') }}</p>
+        @endif
 
-         <ul class="flex flex-col gap-8 font-semibold text-sm text-slate-900 dark:text-slate-50 lg:flex-row max-lg:p-6">
-            <li>
-               <a href="/"
-                  class="hover:text-blue-700 dark:hover:text-blue-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded"
-                  aria-current="page">Home</a>
-            </li>
-            <li>
-               <a href="/blog"
-                  class="hover:text-blue-700 dark:hover:text-blue-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded">Blog</a>
-            </li>
-            <li>
-               <a href="/about"
-                  class="hover:text-blue-700 dark:hover:text-blue-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded">About</a>
-            </li>
-            <li>
-               <a href="/contact"
-                  class="hover:text-blue-700 dark:hover:text-blue-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded">Contact</a>
-            </li>
-            <li>
-               <a href="#"
-                  class="hover:text-blue-700 dark:hover:text-blue-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded">Log
-                  in</a>
-            </li>
-         </ul>
-      </div>
+        @if ($errors->any())
+            <div class="alert error">
+                <ul>
+                    @foreach ($errors->all() as $pesanError)
+                        <li>{{ $pesanError }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
 
-      <div class="flex items-center gap-4 lg:ml-4">
-         <a href="#"
-            class="py-2 px-3.5 text-sm rounded-md font-semibold cursor-pointer text-white border border-blue-600 bg-blue-600 hover:bg-blue-700 transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500">Sign
-            up</a>
+        <div class="contact-wrapper">
 
-         <button type="button" aria-controls="collapseMenu" aria-expanded="false" aria-haspopup="true" id="toggleOpen"
-            class="cursor-pointer lg:hidden focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded">
-            <span class="sr-only">Open main menu</span>
-            <svg class="size-7 fill-slate-900 dark:fill-slate-50" aria-hidden="true" viewBox="0 0 20 20"
-               xmlns="http://www.w3.org/2000/svg">
-               <path fill-rule="evenodd"
-                  d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
-                  clip-rule="evenodd"></path>
-            </svg>
-         </button>
-      </div>
-   </div>
-</nav>
+            <div class="info-card">
+                <h2>Contact Information</h2>
+                @foreach ($info as $item)
+                    <div class="info-item">
+                        <small>{{ $item['label'] }}</small>
+                        <p>{{ $item['isi'] }}</p>
+                    </div>
+                @endforeach
+            </div>
 
-    <h1>Halaman Contact</h1>
-    <ul>
-        <li>
-            Instagram: <a href="https://www.instagram.com/aaavlncphie?vrfl=MW5qNjRwZ3VtYm8yaA==">aaavlncphie</a>
-        </li>
-        <li>
-            Instagram: <a href="https://www.instagram.com/caarooliineeths?obrf=MXQ1ZjJiNHlvZXF6ag==">caarooliineeths</a>
-        </li>
-        <li>
-            Instagram: <a href="https://www.instagram.com/alicia.kirty?vrfl=MWQyenpndWFobzRkZA==">alicia.kirty</a>
-        </li>
-    </ul>
-    
-<footer class="bg-white dark:bg-neutral-900 pt-16 pb-8 px-4 md:px-8">
-   <div class="max-w-7xl mx-auto">
-      <div class="grid grid-cols-2 lg:grid-cols-4 gap-y-12 gap-x-6 sm:gap-x-8">
-         <div>
-            <h3 class="text-slate-900 dark:text-slate-50 font-semibold text-sm mb-6">Quick Links</h3>
-            <ul class="space-y-4 text-slate-600 dark:text-slate-400 text-sm font-normal">
-               <li>
-                  <a href="#"
-                     class="hover:text-slate-900 dark:hover:text-slate-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded transition-all">Our
-                     Story</a>
-               </li>
-               <li>
-                  <a href="#"
-                     class="hover:text-slate-900 dark:hover:text-slate-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded transition-all">Newsroom</a>
-               </li>
-               <li>
-                  <a href="#"
-                     class="hover:text-slate-900 dark:hover:text-slate-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded transition-all">Careers</a>
-               </li>
-               <li>
-                  <a href="#"
-                     class="hover:text-slate-900 dark:hover:text-slate-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded transition-all">Blog</a>
-               </li>
-               <li>
-                  <a href="#"
-                     class="hover:text-slate-900 dark:hover:text-slate-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded transition-all">Press
-                     Kit</a>
-               </li>
-            </ul>
-         </div>
+            <form method="POST" action="{{ route('contact.send') }}">
+                @csrf
 
-         <div>
-            <h3 class="text-slate-900 dark:text-slate-50 font-semibold text-sm mb-6">Services</h3>
-            <ul class="space-y-4 text-slate-600 dark:text-slate-400 text-sm font-normal">
-               <li>
-                  <a href="#"
-                     class="hover:text-slate-900 dark:hover:text-slate-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded transition-all">Web
-                     Development</a>
-               </li>
-               <li>
-                  <a href="#"
-                     class="hover:text-slate-900 dark:hover:text-slate-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded transition-all">Testing
-                     Automation</a>
-               </li>
-               <li>
-                  <a href="#"
-                     class="hover:text-slate-900 dark:hover:text-slate-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded transition-all">AWS
-                     Development Services</a>
-               </li>
-               <li>
-                  <a href="#"
-                     class="hover:text-slate-900 dark:hover:text-slate-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded transition-all">Mobile
-                     App Development</a>
-               </li>
-               <li>
-                  <a href="#"
-                     class="hover:text-slate-900 dark:hover:text-slate-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded transition-all">UI/UX
-                     Design</a>
-               </li>
-            </ul>
-         </div>
+                <label for="nama">Your Name</label>
+                <input type="text" id="nama" name="nama" value="{{ old('nama') }}">
 
-         <div>
-            <h3 class="text-slate-900 dark:text-slate-50 font-semibold text-sm mb-6">Platforms</h3>
-            <ul class="space-y-4 text-slate-600 dark:text-slate-400 text-sm font-normal">
-               <li>
-                  <a href="#"
-                     class="hover:text-slate-900 dark:hover:text-slate-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded transition-all">Hubspot</a>
-               </li>
-               <li>
-                  <a href="#"
-                     class="hover:text-slate-900 dark:hover:text-slate-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded transition-all">Marketo
-                     Integration Services</a>
-               </li>
-               <li>
-                  <a href="#"
-                     class="hover:text-slate-900 dark:hover:text-slate-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded transition-all">Marketing
-                     Glossary</a>
-               </li>
-               <li>
-                  <a href="#"
-                     class="hover:text-slate-900 dark:hover:text-slate-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded transition-all">UIPath</a>
-               </li>
-               <li>
-                  <a href="#"
-                     class="hover:text-slate-900 dark:hover:text-slate-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded transition-all">Salesforce</a>
-               </li>
-               <li>
-                  <a href="#"
-                     class="hover:text-slate-900 dark:hover:text-slate-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded transition-all">Zapier
-                     Integration</a>
-               </li>
-            </ul>
-         </div>
+                <label for="email">Your Email</label>
+                <input type="email" id="email" name="email" value="{{ old('email') }}">
 
-         <div>
-            <h3 class="text-slate-900 dark:text-slate-50 font-semibold text-sm mb-6">Company</h3>
-            <ul class="space-y-4 text-slate-600 dark:text-slate-400 text-sm font-normal">
-               <li>
-                  <a href="#"
-                     class="hover:text-slate-900 dark:hover:text-slate-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded transition-all">Accessibility</a>
-               </li>
-               <li>
-                  <a href="#"
-                     class="hover:text-slate-900 dark:hover:text-slate-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded transition-all">About</a>
-               </li>
-               <li>
-                  <a href="#"
-                     class="hover:text-slate-900 dark:hover:text-slate-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded transition-all">Contact</a>
-               </li>
-               <li>
-                  <a href="#"
-                     class="hover:text-slate-900 dark:hover:text-slate-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded transition-all">Learn
-                     more</a>
-               </li>
-               <li>
-                  <a href="#"
-                     class="hover:text-slate-900 dark:hover:text-slate-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded transition-all">Privacy
-                     Policy</a>
-               </li>
-               <li>
-                  <a href="#"
-                     class="hover:text-slate-900 dark:hover:text-slate-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded transition-all">Terms
-                     of Service</a>
-               </li>
-            </ul>
-         </div>
-      </div>
+                <label for="pesan">Enter Your Message</label>
+                <textarea id="pesan" name="pesan" rows="5">{{ old('pesan') }}</textarea>
 
-      <hr class="border-slate-300 dark:border-neutral-700 my-8" />
-
-      <div class="text-left">
-         <p class="text-slate-600 dark:text-slate-400 text-sm">
-            © ReadymadeUI. All rights reserved.
-         </p>
-      </div>
-   </div>
-</footer>
-</body>
-</html>
+                <button type="submit" class="btn-kirim">Kirim</button>
+            </form>
+    </section>
+@endsection
